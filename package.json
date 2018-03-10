@@ -1,0 +1,38 @@
+{
+	"name": "@sindresorhus/do-not-disturb",
+	"version": "0.0.0",
+	"description": "Control the macOS `Do Not Disturb` feature",
+	"license": "MIT",
+	"repository": "sindresorhus/do-not-disturb",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"test": "xo && ava",
+		"build": "swift build --configuration=release -Xswiftc -static-stdlib && mv .build/release/do-not-disturb .",
+		"prepublish": "npm run build"
+	},
+	"files": [
+		"index.js",
+		"do-not-disturb"
+	],
+	"keywords": [
+		"macos",
+		"swift",
+		"quiet",
+		"notifications"
+	],
+	"dependencies": {
+		"execa": "^0.9.0"
+	},
+	"devDependencies": {
+		"ava": "*",
+		"delay": "^2.0.0",
+		"xo": "*"
+	}
+}

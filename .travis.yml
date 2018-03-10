@@ -1,0 +1,6 @@
+language: swift
+osx_image: xcode9
+script:
+  - npm run build
+  - npm install
+  - npm test
