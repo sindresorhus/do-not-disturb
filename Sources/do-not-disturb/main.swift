@@ -25,28 +25,34 @@ struct CLI {
 }
 
 struct DoNotDisturb {
+	private static let appId = "com.apple.notificationcenterui" as CFString
+
+	private static func set(_ key: String, value: CFPropertyList?) {
+		CFPreferencesSetValue(key as CFString, value, appId, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
+	}
+
 	private static func commitChanges() {
-		CFPreferencesSynchronize("com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
+		CFPreferencesSynchronize(appId, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
 		DistributedNotificationCenter.default().postNotificationName(NSNotification.Name("com.apple.notificationcenterui.dndprefs_changed"), object: nil, deliverImmediately: true)
 	}
 
 	private static func enable() {
-		CFPreferencesSetValue("dndStart" as CFString, 0 as CFPropertyList, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
-		CFPreferencesSetValue("dndEnd" as CFString, 1440 as CFPropertyList, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
-		CFPreferencesSetValue("doNotDisturb" as CFString, true as CFPropertyList, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
+		set("dndStart", value: 0 as CFPropertyList)
+		set("dndEnd", value: 1440 as CFPropertyList)
+		set("doNotDisturb", value: true as CFPropertyList)
 		commitChanges()
 	}
 
 	private static func disable() {
-		CFPreferencesSetValue("dndStart" as CFString, nil, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
-		CFPreferencesSetValue("dndEnd" as CFString, nil, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
-		CFPreferencesSetValue("doNotDisturb" as CFString, false as CFPropertyList, "com.apple.notificationcenterui" as CFString, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
+		set("dndStart", value: nil)
+		set("dndEnd", value: nil)
+		set("doNotDisturb", value: false as CFPropertyList)
 		commitChanges()
 	}
 
 	static var isEnabled: Bool {
 		get {
-			return CFPreferencesGetAppBooleanValue("doNotDisturb" as CFString, "com.apple.notificationcenterui" as CFString, nil)
+			return CFPreferencesGetAppBooleanValue("doNotDisturb" as CFString, appId, nil)
 		}
 		set {
 			if newValue {
