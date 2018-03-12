@@ -1,6 +1,6 @@
 {
 	"name": "@sindresorhus/do-not-disturb",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Control the macOS `Do Not Disturb` feature",
 	"license": "MIT",
 	"repository": "sindresorhus/do-not-disturb",
