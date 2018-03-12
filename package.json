@@ -28,6 +28,7 @@
 		"notifications"
 	],
 	"dependencies": {
+		"electron-util": "^0.7.0",
 		"execa": "^0.9.0"
 	},
 	"devDependencies": {

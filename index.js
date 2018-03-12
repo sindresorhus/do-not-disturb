@@ -1,8 +1,9 @@
 'use strict';
 const path = require('path');
 const execa = require('execa');
+const electronUtil = require('electron-util/node');
 
-const bin = path.join(__dirname, 'do-not-disturb');
+const bin = path.join(electronUtil.fixPathForAsarUnpack(__dirname), 'do-not-disturb');
 
 exports.enable = async () => {
 	await execa.sync(bin, ['on']);
