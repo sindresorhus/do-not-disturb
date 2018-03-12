@@ -32,7 +32,6 @@
 	},
 	"devDependencies": {
 		"ava": "*",
-		"delay": "^2.0.0",
 		"xo": "*"
 	}
 }

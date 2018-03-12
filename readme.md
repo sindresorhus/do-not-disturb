@@ -15,13 +15,17 @@ $ npm install @sindresorhus/do-not-disturb
 ```js
 const doNotDisturb = require('@sindresorhus/do-not-disturb');
 
-doNotDisturb.enable();
+(async () => {
+	await doNotDisturb.enable();
+})();
 ```
 
 
 ## API
 
 ### doNotDisturb
+
+All the methods return a `Promise`. You only really need to `await` them if you use multiple methods at once.
 
 #### .enable()
 
@@ -35,7 +39,7 @@ Type: `boolean`
 
 Force it to be enabled/disabled.
 
-#### .isEnabled()
+#### .isEnabled(): `Promise<boolean>`
 
 
 ## Related

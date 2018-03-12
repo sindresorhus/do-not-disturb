@@ -4,20 +4,24 @@ const execa = require('execa');
 
 const bin = path.join(__dirname, 'do-not-disturb');
 
-exports.enable = () => {
-	execa.sync(bin, ['on']);
+exports.enable = async () => {
+	await execa.sync(bin, ['on']);
 };
 
-exports.disable = () => {
-	execa.sync(bin, ['off']);
+exports.disable = async () => {
+	await execa(bin, ['off']);
 };
 
-exports.toggle = force => {
+exports.toggle = async force => {
 	if (force !== undefined) {
-		execa.sync(bin, [force ? 'on' : 'off']);
+		await execa(bin, [force ? 'on' : 'off']);
+		return;
 	}
 
-	execa.sync(bin, ['toggle']);
+	await execa(bin, ['toggle']);
 };
 
-exports.isEnabled = () => execa.sync(bin, ['status']).stdout === 'on';
+exports.isEnabled = async () => {
+	const {stdout} = await execa(bin, ['status']);
+	return stdout === 'on';
+};

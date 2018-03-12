@@ -1,41 +1,28 @@
 import test from 'ava';
-import delay from 'delay';
 import m from '.';
 
 let isEnabledInitially;
 
-test.before(() => {
-	isEnabledInitially = m.isEnabled();
+test.before(async () => {
+	isEnabledInitially = await m.isEnabled();
 });
 
-test.after(() => {
-	m.toggle(isEnabledInitially);
+test.after(async () => {
+	await m.toggle(isEnabledInitially);
 });
-
-const stepDelay = () => delay(process.env.CI ? 10000 : 2000);
 
 test('main', async t => {
-	await stepDelay();
-	const isEnabled = m.isEnabled();
-	await stepDelay();
+	const isEnabled = await m.isEnabled();
 
-	m.toggle();
-	await stepDelay();
-	t.not(isEnabled, m.isEnabled());
-	await stepDelay();
+	await m.toggle();
+	t.not(isEnabled, await m.isEnabled());
 
-	m.disable();
-	await stepDelay();
-	t.false(m.isEnabled());
-	await stepDelay();
+	await m.disable();
+	t.false(await m.isEnabled());
 
-	m.toggle(false);
-	await stepDelay();
-	t.false(m.isEnabled());
-	await stepDelay();
+	await m.toggle(false);
+	t.false(await m.isEnabled());
 
-	m.enable();
-	await stepDelay();
-	t.true(m.isEnabled());
-	await stepDelay();
+	await m.enable();
+	t.true(await m.isEnabled());
 });
