@@ -17,6 +17,11 @@ public struct DoNotDisturb {
 		set("dndEnd", value: 1440 as CFPropertyList)
 		set("doNotDisturb", value: true as CFPropertyList)
 		commitChanges()
+
+		// For some reason `doNotDisturb` does not take the first time around
+		// TODO: Figure out why
+		sleep(for: 0.4)
+		set("doNotDisturb", value: true as CFPropertyList)
 	}
 
 	private static func disable() {

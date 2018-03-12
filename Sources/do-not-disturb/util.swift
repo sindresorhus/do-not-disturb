@@ -6,6 +6,10 @@ extension Bool {
 	}
 }
 
+func sleep(for duration: TimeInterval) {
+	usleep(useconds_t(duration * Double(USEC_PER_SEC)))
+}
+
 struct CLI {
 	final class StandardErrorTextStream: TextOutputStream {
 		func write(_ string: String) {
