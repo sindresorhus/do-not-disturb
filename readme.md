@@ -2,6 +2,8 @@
 
 > Control the macOS `Do Not Disturb` feature
 
+Note that this package does not work inside a [sandboxed](https://developer.apple.com/app-sandboxing/) app.
+
 
 ## Install
 
