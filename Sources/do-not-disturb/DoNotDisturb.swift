@@ -12,16 +12,22 @@ public struct DoNotDisturb {
 		DistributedNotificationCenter.default().postNotificationName(NSNotification.Name("com.apple.notificationcenterui.dndprefs_changed"), object: nil, deliverImmediately: true)
 	}
 
+  private static func restartNotificationCenter() {
+		NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.notificationcenterui").first?.forceTerminate()
+  }
+
 	private static func enable() {
 		set("doNotDisturb", value: true as CFPropertyList)
-    set("doNotDisturbDate", value: Date() as CFPropertyList)
+		set("doNotDisturbDate", value: Date() as CFPropertyList)
 		commitChanges()
+		restartNotificationCenter()
 	}
 
 	private static func disable() {
 		set("doNotDisturbDate", value: nil)
 		set("doNotDisturb", value: false as CFPropertyList)
 		commitChanges()
+		restartNotificationCenter()
 	}
 
 	static var isEnabled: Bool {
