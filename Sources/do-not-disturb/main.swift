@@ -1,15 +1,15 @@
 import Cocoa
 
 switch CLI.arguments.first {
-case "on"?:
+case "on":
 	DoNotDisturb.isEnabled = true
-case "off"?:
+case "off":
 	DoNotDisturb.isEnabled = false
-case "toggle"?:
+case "toggle":
 	DoNotDisturb.isEnabled.toggle()
-case "status"?:
+case "status":
 	print(DoNotDisturb.isEnabled ? "on" : "off")
 default:
-	print("Unsupported command")
+	print("Unsupported command", to: .standardError)
 	exit(1)
 }

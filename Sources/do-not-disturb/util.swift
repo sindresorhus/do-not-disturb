@@ -1,5 +1,6 @@
 import Cocoa
 
+/// TODO: Remove when using Swift 4.2
 extension Bool {
 	mutating func toggle() {
 		self = !self
@@ -10,20 +11,47 @@ func sleep(for duration: TimeInterval) {
 	usleep(useconds_t(duration * Double(USEC_PER_SEC)))
 }
 
+extension FileHandle: TextOutputStream {
+	public func write(_ string: String) {
+		write(string.data(using: .utf8)!)
+	}
+}
+
 struct CLI {
-	final class StandardErrorTextStream: TextOutputStream {
-		func write(_ string: String) {
-			FileHandle.standardError.write(string.data(using: .utf8)!)
-		}
-	}
-
-	static let stdout = FileHandle.standardOutput
-	static let stderr = FileHandle.standardError
-
-	private static var _stderr = StandardErrorTextStream()
-	static func printErr<T>(_ item: T) {
-		Swift.print(item, to: &_stderr)
-	}
+	static var standardInput = FileHandle.standardOutput
+	static var standardOutput = FileHandle.standardOutput
+	static var standardError = FileHandle.standardError
 
 	static let arguments = Array(CommandLine.arguments.dropFirst(1))
+}
+
+enum PrintOutputTarget {
+	case standardOutput
+	case standardError
+}
+
+/// Make `print()` accept an array of items
+/// Since Swift doesn't support spreading...
+private func print<Target>(
+	_ items: [Any],
+	separator: String = " ",
+	terminator: String = "\n",
+	to output: inout Target
+) where Target: TextOutputStream {
+	let item = items.map { "\($0)" }.joined(separator: separator)
+	Swift.print(item, terminator: terminator, to: &output)
+}
+
+func print(
+	_ items: Any...,
+	separator: String = " ",
+	terminator: String = "\n",
+	to output: PrintOutputTarget = .standardOutput
+) {
+	switch output {
+	case .standardOutput:
+		print(items, separator: separator, terminator: terminator)
+	case .standardError:
+		print(items, separator: separator, terminator: terminator, to: &CLI.standardError)
+	}
 }
