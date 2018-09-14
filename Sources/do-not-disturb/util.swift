@@ -1,12 +1,5 @@
 import Cocoa
 
-/// TODO: Remove when using Swift 4.2
-extension Bool {
-	mutating func toggle() {
-		self = !self
-	}
-}
-
 func sleep(for duration: TimeInterval) {
 	usleep(useconds_t(duration * Double(USEC_PER_SEC)))
 }
