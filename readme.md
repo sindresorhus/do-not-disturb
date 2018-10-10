@@ -48,8 +48,10 @@ Force it to be enabled/disabled.
 
 - [do-not-disturb-cli](https://github.com/sindresorhus/do-not-disturb-cli) - CLI for this module
 - [dark-mode](https://github.com/sindresorhus/dark-mode) - Control the macOS dark mode
+- [macos-wallpaper](https://github.com/sindresorhus/macos-wallpaper) - Manage the desktop wallpaper
 - [file-icon](https://github.com/sindresorhus/file-icon) - Get the icon of a file or app as a PNG image
 - [app-path](https://github.com/sindresorhus/app-path) - Get the path to an app
+- [More…](https://github.com/search?q=user%3Asindresorhus+language%3Aswift)
 
 
 ## License
