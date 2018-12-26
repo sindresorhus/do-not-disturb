@@ -14,7 +14,7 @@
 	},
 	"scripts": {
 		"test": "xo && ava",
-		"build": "swift build --configuration=release -Xswiftc -static-stdlib && mv .build/release/do-not-disturb .",
+		"build": "swift build --configuration=release --static-swift-stdlib && mv .build/release/do-not-disturb .",
 		"prepublish": "npm run build"
 	},
 	"files": [
