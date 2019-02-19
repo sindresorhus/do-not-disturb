@@ -27,11 +27,21 @@ public struct DoNotDisturb {
 
 	private static func disable() {
 		if isEnabled {
-			set("doNotDisturbDate", value: nil)
 			set("doNotDisturb", value: false as CFPropertyList)
+			set("doNotDisturbDate", value: nil)
 			commitChanges()
 			restartNotificationCenter()
+			restoreMenubarIcon()
 		}
+	}
+
+	private static func restoreMenubarIcon() {
+		set("dndStart", value: 0 as CFPropertyList)
+		set("dndEnd", value: 1440 as CFPropertyList)
+		sleep(for: 0.3)
+		set("dndStart", value: nil)
+		set("dndEnd", value: nil)
+		commitChanges()
 	}
 
 	static var isEnabled: Bool {
