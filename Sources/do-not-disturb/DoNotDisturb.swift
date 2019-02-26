@@ -17,22 +17,26 @@ public struct DoNotDisturb {
 	}
 
 	private static func enable() {
-		if !isEnabled {
-			set("doNotDisturb", value: true as CFPropertyList)
-			set("doNotDisturbDate", value: Date() as CFPropertyList)
-			commitChanges()
-			restartNotificationCenter()
+		guard !isEnabled else {
+			return
 		}
+
+		set("doNotDisturb", value: true as CFPropertyList)
+		set("doNotDisturbDate", value: Date() as CFPropertyList)
+		commitChanges()
+		restartNotificationCenter()
 	}
 
 	private static func disable() {
-		if isEnabled {
-			set("doNotDisturb", value: false as CFPropertyList)
-			set("doNotDisturbDate", value: nil)
-			commitChanges()
-			restartNotificationCenter()
-			restoreMenubarIcon()
+		guard isEnabled else {
+			return
 		}
+
+		set("doNotDisturb", value: false as CFPropertyList)
+		set("doNotDisturbDate", value: nil)
+		commitChanges()
+		restartNotificationCenter()
+		restoreMenubarIcon()
 	}
 
 	private static func restoreMenubarIcon() {
