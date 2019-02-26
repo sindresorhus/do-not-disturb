@@ -42,7 +42,11 @@ public struct DoNotDisturb {
 	private static func restoreMenubarIcon() {
 		set("dndStart", value: 0 as CFPropertyList)
 		set("dndEnd", value: 1440 as CFPropertyList)
-		sleep(for: 0.3)
+
+		// We need to sleep for a little bit, otherwise it doesn't take effect.
+		// It works with 0.3, but not with 0.2, so we're using 0.4 just to be sure.
+		sleep(for: 0.4)
+
 		set("dndStart", value: nil)
 		set("dndEnd", value: nil)
 		commitChanges()
