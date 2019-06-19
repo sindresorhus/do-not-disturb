@@ -25,4 +25,15 @@ test('main', async t => {
 
 	await m.enable();
 	t.true(await m.isEnabled());
+
+	const beforeToggle = await m.isEnabled();
+	const emitter = await m.startPolling(50);
+
+	emitter.on('change', async value => {
+		t.not(value, beforeToggle);
+		t.is(value, await m.isEnabled());
+	});
+
+	await m.toggle();
+	await new Promise(resolve => setTimeout(resolve, 100));
 });

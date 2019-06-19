@@ -43,6 +43,19 @@ Force it to be enabled/disabled.
 
 #### .isEnabled(): `Promise<boolean>`
 
+#### .startPolling([milliseconds]): `Promise<EventEmitter>`
+
+##### milliseconds
+Type: `number`
+Default: `3000`
+
+```js
+const emitter = await startPolling(milliseconds);
+
+emitter.on('change', fn);
+```
+
+#### .stopPolling()
 
 ## Related
 
