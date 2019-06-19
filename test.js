@@ -1,39 +1,41 @@
 import test from 'ava';
-import m from '.';
+import doNotDisturb from '.';
 
 let isEnabledInitially;
 
 test.before(async () => {
-	isEnabledInitially = await m.isEnabled();
+	isEnabledInitially = await doNotDisturb.isEnabled();
 });
 
 test.after(async () => {
-	await m.toggle(isEnabledInitially);
+	await doNotDisturb.toggle(isEnabledInitially);
 });
 
 test('main', async t => {
-	const isEnabled = await m.isEnabled();
+	const isEnabled = await doNotDisturb.isEnabled();
 
-	await m.toggle();
-	t.not(isEnabled, await m.isEnabled());
+	await doNotDisturb.toggle();
+	t.not(isEnabled, await doNotDisturb.isEnabled());
 
-	await m.disable();
-	t.false(await m.isEnabled());
+	await doNotDisturb.disable();
+	t.false(await doNotDisturb.isEnabled());
 
-	await m.toggle(false);
-	t.false(await m.isEnabled());
+	await doNotDisturb.toggle(false);
+	t.false(await doNotDisturb.isEnabled());
 
-	await m.enable();
-	t.true(await m.isEnabled());
+	await doNotDisturb.enable();
+	t.true(await doNotDisturb.isEnabled());
 
-	const beforeToggle = await m.isEnabled();
-	const emitter = await m.startPolling(50);
+	const beforeToggle = await doNotDisturb.isEnabled();
+	const emitter = await doNotDisturb.startPolling(50);
 
 	emitter.on('change', async value => {
 		t.not(value, beforeToggle);
-		t.is(value, await m.isEnabled());
+		t.is(value, await doNotDisturb.isEnabled());
 	});
 
-	await m.toggle();
+	await doNotDisturb.toggle();
 	await new Promise(resolve => setTimeout(resolve, 100));
+	await doNotDisturb.enable();
+	t.true(await doNotDisturb.isEnabled());
 });
