@@ -43,19 +43,35 @@ Force it to be enabled/disabled.
 
 #### .isEnabled(): `Promise<boolean>`
 
-#### .startPolling([milliseconds]): `Promise<EventEmitter>`
+#### `.on('change', listener, options): EventEmitter`
 
-##### milliseconds
+Attach an event listener that gets called when `.isEnabled()` is changed.
+
+##### options
+
+Type: `Object`
+Default: `{ pollInterval: 3000 }`
+
+###### pollInterval
+
 Type: `number`
-Default: `3000`
+
+`pollInterval` is the interval (in milliseconds) at which the polling for the `change` event is made.
+
+#### `.off('change', listener): EventEmitter`
+
+Remove an event listener that was attached previously.
 
 ```js
-const emitter = await startPolling(milliseconds);
+const doNotDisturb = require('@sindresorhus/do-not-disturb');
 
-emitter.on('change', fn);
+const listener = (newValue) => {
+	console.log(`do not disturb : ${newValue}`);
+}
+
+doNotDisturb.on('change', listener, {pollInterval: 100});
+doNotDisturb.off('change', listener);
 ```
-
-#### .stopPolling()
 
 ## Related
 

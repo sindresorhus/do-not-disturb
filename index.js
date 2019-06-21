@@ -11,27 +11,42 @@ const isEnabled = async () => {
 	return stdout === 'on';
 };
 
-let pollingInterval;
+let emitter;
 
-exports.stopPolling = () => clearInterval(pollingInterval);
+const createEmitter = (pollInterval = 3000) => {
+	if (emitter) {
+		return emitter;
+	}
 
-exports.startPolling = async (milliseconds = 3000) => {
-	exports.stopPolling();
+	emitter = new EventEmitter();
 
-	const emitter = new EventEmitter();
-	let currentValue = await isEnabled();
+	emitter.once('newListener', async event => {
+		if (event === 'change') {
+			let currentValue = await isEnabled();
 
-	pollingInterval = setInterval(async () => {
-		const newValue = await isEnabled();
+			const pollingInterval = setInterval(async () => {
+				if (emitter.listenerCount('change') === 0) {
+					clearInterval(pollingInterval);
+					return;
+				}
 
-		if (newValue !== currentValue) {
-			currentValue = newValue;
-			emitter.emit('change', newValue);
+				const nextValue = await isEnabled();
+
+				if (nextValue !== currentValue) {
+					currentValue = nextValue;
+					emitter.emit('change', nextValue);
+				}
+			}, pollInterval);
 		}
-	}, milliseconds);
+	});
 
 	return emitter;
 };
+
+exports.on = (eventName, listener, options = {}) =>
+	createEmitter(options.pollInterval).on(eventName, listener);
+exports.off = (eventName, listener, options = {}) =>
+	createEmitter(options.pollInterval).off(eventName, listener);
 
 exports.enable = async () => {
 	await execa.sync(bin, ['on']);
