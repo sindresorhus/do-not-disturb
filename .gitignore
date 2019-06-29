@@ -1,4 +1,5 @@
 node_modules
+yarn.lock
 /.build
 /*.xcodeproj
 /do-not-disturb

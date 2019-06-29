@@ -14,8 +14,8 @@
 	},
 	"scripts": {
 		"test": "xo && ava",
-		"build": "swift build --configuration=release --static-swift-stdlib && mv .build/release/do-not-disturb .",
-		"prepublish": "npm run build"
+		"build": "swift build --configuration=release && mv .build/release/do-not-disturb .",
+		"//prepublish": "npm run build"
 	},
 	"files": [
 		"index.js",
@@ -28,11 +28,12 @@
 		"notifications"
 	],
 	"dependencies": {
-		"electron-util": "^0.11.0",
-		"execa": "^1.0.0"
+		"electron-util": "^0.12.1",
+		"execa": "^2.0.1"
 	},
 	"devDependencies": {
-		"ava": "^1.3.1",
+		"ava": "^2.1.0",
+		"delay": "^4.3.0",
 		"xo": "^0.24.0"
 	}
 }

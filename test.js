@@ -1,4 +1,5 @@
 import test from 'ava';
+import delay from 'delay';
 import doNotDisturb from '.';
 
 let isEnabledInitially;
@@ -38,7 +39,7 @@ test('main', async t => {
 	});
 
 	await doNotDisturb.toggle();
-	await new Promise(resolve => setTimeout(resolve, 100));
+	await delay(100);
 
 	doNotDisturb.off('change', listener);
 
@@ -47,5 +48,5 @@ test('main', async t => {
 	});
 
 	await doNotDisturb.toggle();
-	await new Promise(resolve => setTimeout(resolve, 100));
+	await delay(100);
 });
