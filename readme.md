@@ -43,6 +43,36 @@ Force it to be enabled/disabled.
 
 #### .isEnabled(): `Promise<boolean>`
 
+#### `.on('change', listener, options): EventEmitter`
+
+Attach an event listener that gets called when `.isEnabled()` is changed.
+
+##### options
+
+Type: `object`
+
+###### pollInterval
+
+Type: `number`<br>
+Default: `3000`
+
+`pollInterval` is the interval (in milliseconds) at which the polling for the `change` event is made.
+
+#### `.off('change', listener): EventEmitter`
+
+Remove an event listener that was attached previously.
+
+```js
+const doNotDisturb = require('@sindresorhus/do-not-disturb');
+
+const listener = (newValue) => {
+	console.log(`do not disturb : ${newValue}`);
+}
+
+doNotDisturb.on('change', listener, {pollInterval: 100});
+doNotDisturb.off('change', listener);
+```
+
 
 ## Related
 

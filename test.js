@@ -25,4 +25,27 @@ test('main', async t => {
 
 	await doNotDisturb.enable();
 	t.true(await doNotDisturb.isEnabled());
+
+	const beforeToggle = await doNotDisturb.isEnabled();
+
+	const listener = async value => {
+		t.not(value, beforeToggle);
+		t.is(value, await doNotDisturb.isEnabled());
+	};
+
+	doNotDisturb.on('change', listener, {
+		pollInterval: 50
+	});
+
+	await doNotDisturb.toggle();
+	await new Promise(resolve => setTimeout(resolve, 100));
+
+	doNotDisturb.off('change', listener);
+
+	doNotDisturb.on('change', value => {
+		t.is(true, value);
+	});
+
+	await doNotDisturb.toggle();
+	await new Promise(resolve => setTimeout(resolve, 100));
 });
