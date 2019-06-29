@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const {EventEmitter} = require('events');
+const EventEmitter = require('events');
 const execa = require('execa');
 const electronUtil = require('electron-util/node');
 
