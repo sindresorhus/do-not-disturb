@@ -49,12 +49,12 @@ Attach an event listener that gets called when `.isEnabled()` is changed.
 
 ##### options
 
-Type: `Object`
-Default: `{ pollInterval: 3000 }`
+Type: `object`
 
 ###### pollInterval
 
-Type: `number`
+Type: `number`<br>
+Default: `3000`
 
 `pollInterval` is the interval (in milliseconds) at which the polling for the `change` event is made.
 
@@ -72,6 +72,7 @@ const listener = (newValue) => {
 doNotDisturb.on('change', listener, {pollInterval: 100});
 doNotDisturb.off('change', listener);
 ```
+
 
 ## Related
 
