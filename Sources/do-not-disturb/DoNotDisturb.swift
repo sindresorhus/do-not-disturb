@@ -54,7 +54,7 @@ public struct DoNotDisturb {
 
 	static var isEnabled: Bool {
 		get {
-			return CFPreferencesGetAppBooleanValue("doNotDisturb" as CFString, appId, nil)
+			CFPreferencesGetAppBooleanValue("doNotDisturb" as CFString, appId, nil)
 		}
 		set {
 			if newValue {
