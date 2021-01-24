@@ -1,9 +1,8 @@
-# do-not-disturb [![Build Status](https://travis-ci.org/sindresorhus/do-not-disturb.svg?branch=master)](https://travis-ci.org/sindresorhus/do-not-disturb)
+# do-not-disturb
 
 > Control the macOS `Do Not Disturb` feature
 
 Note that this package does not work inside a [sandboxed](https://developer.apple.com/app-sandboxing/) app.
-
 
 ## Install
 
@@ -11,17 +10,13 @@ Note that this package does not work inside a [sandboxed](https://developer.appl
 $ npm install @sindresorhus/do-not-disturb
 ```
 
-
 ## Usage
 
 ```js
-const doNotDisturb = require('@sindresorhus/do-not-disturb');
+import doNotDisturb from '@sindresorhus/do-not-disturb';
 
-(async () => {
-	await doNotDisturb.enable();
-})();
+await doNotDisturb.enable();
 ```
-
 
 ## API
 
@@ -53,7 +48,7 @@ Type: `object`
 
 ###### pollInterval
 
-Type: `number`<br>
+Type: `number`\
 Default: `3000`
 
 Interval in milliseconds at which the polling for the `change` event is made.
@@ -63,7 +58,7 @@ Interval in milliseconds at which the polling for the `change` event is made.
 Remove an event listener that was attached previously.
 
 ```js
-const doNotDisturb = require('@sindresorhus/do-not-disturb');
+import doNotDisturb from '@sindresorhus/do-not-disturb';
 
 const listener = status => {
 	console.log(`Do Not Disturb status: ${status}`);
@@ -72,9 +67,9 @@ const listener = status => {
 doNotDisturb.on('change', listener, {pollInterval: 100});
 
 // …
+
 doNotDisturb.off('change', listener);
 ```
-
 
 ## Related
 

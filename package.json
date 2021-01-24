@@ -15,7 +15,7 @@
 	"scripts": {
 		"test": "xo && ava",
 		"build": "swift build --configuration=release && mv .build/release/do-not-disturb .",
-		"//prepublish": "npm run build"
+		"prepare": "npm run build"
 	},
 	"files": [
 		"index.js",

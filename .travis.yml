@@ -1,7 +1,0 @@
-language: swift
-osx_image: xcode11
-script:
-  - nvm install 12
-  - npm run build
-  - npm install
-  - npm test
