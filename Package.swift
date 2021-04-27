@@ -1,14 +1,22 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 import PackageDescription
 
 let package = Package(
-	name: "do-not-disturb",
+	name: "DoNotDisturb",
 	platforms: [
 		.macOS(.v10_10)
 	],
+	products: [
+		.executable(
+			name: "do-not-disturb",
+			targets: [
+				"DoNotDisturb"
+			]
+		)
+	],
 	targets: [
-		.target(
-			name: "do-not-disturb"
+		.executableTarget(
+			name: "DoNotDisturb"
 		)
 	]
 )

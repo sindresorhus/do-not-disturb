@@ -9,7 +9,7 @@ public struct DoNotDisturb {
 
 	private static func commitChanges() {
 		CFPreferencesSynchronize(appId, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost)
-		DistributedNotificationCenter.default().postNotificationName(NSNotification.Name("com.apple.notificationcenterui.dndprefs_changed"), object: nil, deliverImmediately: true)
+		DistributedNotificationCenter.default().postNotificationName(Notification.Name("com.apple.notificationcenterui.dndprefs_changed"), object: nil, deliverImmediately: true)
 	}
 
 	private static func restartNotificationCenter() {
