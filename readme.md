@@ -4,6 +4,8 @@
 
 Note that this package does not work inside a [sandboxed](https://developer.apple.com/app-sandboxing/) app.
 
+**If you want to see an official API for this, please copy-paste the [following](https://github.com/feedback-assistant/reports/issues/221) into a new [Feedback Assistant](https://developer.apple.com/bug-reporting/) report, and submit it to Apple. Apple uses duplicates as an indication for how popular a request is.**
+
 ## Install
 
 ```
