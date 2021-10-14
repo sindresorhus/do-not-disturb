@@ -1,8 +1,10 @@
-'use strict';
-const path = require('path');
-const EventEmitter = require('events');
-const execa = require('execa');
-const electronUtil = require('electron-util/node');
+import EventEmitter from 'node:events';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import execa from 'execa';
+import electronUtil from 'electron-util/node.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const binary = path.join(electronUtil.fixPathForAsarUnpack(__dirname), 'do-not-disturb');
 
@@ -43,21 +45,23 @@ const createEmitter = (pollInterval = 3000) => {
 	return emitter;
 };
 
-exports.on = (eventName, listener, options = {}) =>
+const doNotDisturb = {};
+
+doNotDisturb.on = (eventName, listener, options = {}) =>
 	createEmitter(options.pollInterval).on(eventName, listener);
 
-exports.off = (eventName, listener, options = {}) =>
+doNotDisturb.off = (eventName, listener, options = {}) =>
 	createEmitter(options.pollInterval).off(eventName, listener);
 
-exports.enable = async () => {
+doNotDisturb.enable = async () => {
 	await execa.sync(binary, ['on']);
 };
 
-exports.disable = async () => {
+doNotDisturb.disable = async () => {
 	await execa(binary, ['off']);
 };
 
-exports.toggle = async force => {
+doNotDisturb.toggle = async force => {
 	if (force !== undefined) {
 		await execa(binary, [force ? 'on' : 'off']);
 		return;
@@ -66,4 +70,6 @@ exports.toggle = async force => {
 	await execa(binary, ['toggle']);
 };
 
-exports.isEnabled = isEnabled;
+doNotDisturb.isEnabled = isEnabled;
+
+export default doNotDisturb;

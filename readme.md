@@ -8,8 +8,8 @@ Note that this package does not work inside a [sandboxed](https://developer.appl
 
 ## Install
 
-```
-$ npm install @sindresorhus/do-not-disturb
+```sh
+npm install @sindresorhus/do-not-disturb
 ```
 
 ## Usage

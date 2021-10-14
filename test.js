@@ -1,6 +1,6 @@
 import test from 'ava';
 import delay from 'delay';
-import doNotDisturb from '.';
+import doNotDisturb from './index.js';
 
 let isEnabledInitially;
 
@@ -35,7 +35,7 @@ test('main', async t => {
 	};
 
 	doNotDisturb.on('change', listener, {
-		pollInterval: 50
+		pollInterval: 50,
 	});
 
 	await doNotDisturb.toggle();
@@ -44,7 +44,7 @@ test('main', async t => {
 	doNotDisturb.off('change', listener);
 
 	doNotDisturb.on('change', value => {
-		t.is(true, value);
+		t.true(value);
 	});
 
 	await doNotDisturb.toggle();

@@ -4,13 +4,16 @@
 	"description": "Control the macOS `Do Not Disturb` feature",
 	"license": "MIT",
 	"repository": "sindresorhus/do-not-disturb",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
+	"type": "module",
+	"exports": "./index.js",
 	"engines": {
-		"node": ">=8"
+		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
 	},
 	"scripts": {
 		"test": "xo && ava",
@@ -28,12 +31,12 @@
 		"notifications"
 	],
 	"dependencies": {
-		"electron-util": "^0.12.1",
-		"execa": "^2.0.1"
+		"electron-util": "^0.17.2",
+		"execa": "^5.1.1"
 	},
 	"devDependencies": {
-		"ava": "^2.1.0",
-		"delay": "^4.3.0",
-		"xo": "^0.24.0"
+		"ava": "^3.15.0",
+		"delay": "^5.0.0",
+		"xo": "^0.45.0"
 	}
 }
