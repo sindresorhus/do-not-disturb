@@ -17,7 +17,7 @@
 	},
 	"scripts": {
 		"test": "xo && ava",
-		"build": "swift build --configuration=release && mv .build/release/do-not-disturb .",
+		"build": "swift build --configuration=release --arch arm64 --arch x86_64 && mv .build/apple/Products/Release/do-not-disturb .",
 		"prepare": "npm run build"
 	},
 	"files": [
@@ -32,11 +32,11 @@
 	],
 	"dependencies": {
 		"electron-util": "^0.17.2",
-		"execa": "^5.1.1"
+		"execa": "^6.0.0"
 	},
 	"devDependencies": {
-		"ava": "^3.15.0",
+		"ava": "^4.0.1",
 		"delay": "^5.0.0",
-		"xo": "^0.45.0"
+		"xo": "^0.47.0"
 	}
 }

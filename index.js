@@ -1,7 +1,7 @@
 import EventEmitter from 'node:events';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import execa from 'execa';
+import {execa, execaSync} from 'execa';
 import electronUtil from 'electron-util/node.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ doNotDisturb.off = (eventName, listener, options = {}) =>
 	createEmitter(options.pollInterval).off(eventName, listener);
 
 doNotDisturb.enable = async () => {
-	await execa.sync(binary, ['on']);
+	await execaSync(binary, ['on']);
 };
 
 doNotDisturb.disable = async () => {
