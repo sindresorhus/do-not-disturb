@@ -1,6 +1,6 @@
-import Cocoa
+import AppKit
 
-public struct DoNotDisturb {
+public enum DoNotDisturb {
 	private static let appId = "com.apple.notificationcenterui" as CFString
 
 	private static func set(_ key: String, value: CFPropertyList?) {

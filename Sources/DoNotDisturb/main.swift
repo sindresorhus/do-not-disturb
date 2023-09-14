@@ -1,4 +1,4 @@
-import Cocoa
+import Darwin
 
 switch CLI.arguments.first {
 case "on":

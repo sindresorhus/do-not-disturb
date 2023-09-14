@@ -2,6 +2,11 @@
 
 > Control the macOS `Do Not Disturb` feature
 
+> [!WARNING]
+> This package is archived. It does not work on macOS 11 or later.
+>
+> macOS 11 replaced Do Not Disturb with Focus, and Apple ships no public API to read or set it. Use a shortcut with the built-in "Set Focus" action instead: `shortcuts run "<shortcut name>"`.
+
 Note that this package does not work inside a [sandboxed](https://developer.apple.com/app-sandboxing/) app.
 
 **If you want to see an official API for this, please copy-paste the [following](https://github.com/feedback-assistant/reports/issues/221) into a new [Feedback Assistant](https://developer.apple.com/bug-reporting/) report, and submit it to Apple. Apple uses duplicates as an indication for how popular a request is.**
@@ -80,4 +85,4 @@ doNotDisturb.off('change', listener);
 - [macos-wallpaper](https://github.com/sindresorhus/macos-wallpaper) - Manage the desktop wallpaper
 - [file-icon](https://github.com/sindresorhus/file-icon) - Get the icon of a file or app as a PNG image
 - [app-path](https://github.com/sindresorhus/app-path) - Get the path to an app
-- [More…](https://github.com/search?q=user%3Asindresorhus+language%3Aswift)
+- [More…](https://github.com/search?q=user%3Asindresorhus+language%3Aswift+archived%3Afalse&type=repositories)

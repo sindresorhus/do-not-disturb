@@ -1,10 +1,10 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
 	name: "DoNotDisturb",
 	platforms: [
-		.macOS(.v10_10)
+		.macOS(.v10_13)
 	],
 	products: [
 		.executable(
